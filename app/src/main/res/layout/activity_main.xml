@@ -17,11 +17,11 @@
         <!-- Google Keep Style Search Bar Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="54dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/keep_surface"
-            app:cardCornerRadius="24dp"
+            app:cardCornerRadius="27dp"
             app:cardElevation="4dp"
             app:strokeColor="@color/keep_card_border"
             app:strokeWidth="1dp">
@@ -34,8 +34,8 @@
                 android:paddingHorizontal="16dp">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:src="@android:drawable/ic_menu_search"
                     app:tint="@color/keep_on_surface_variant"
                     android:contentDescription="Search Icon" />
@@ -49,7 +49,7 @@
                     android:hint="@string/search_hint"
                     android:textColor="@color/keep_on_surface"
                     android:textColorHint="@color/keep_on_surface_variant"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:paddingStart="12dp"
@@ -79,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/filter_all"
                     android:checked="true"
+                    android:textSize="14sp"
                     android:textColor="@color/keep_on_surface"
                     app:chipBackgroundColor="@color/keep_surface"
                     app:chipStrokeColor="@color/keep_card_border" />
@@ -89,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/filter_illness"
+                    android:textSize="14sp"
                     android:textColor="@color/keep_on_surface"
                     app:chipBackgroundColor="@color/keep_surface"
                     app:chipStrokeColor="@color/keep_card_border" />
@@ -99,6 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/filter_injury"
+                    android:textSize="14sp"
                     android:textColor="@color/keep_on_surface"
                     app:chipBackgroundColor="@color/keep_surface"
                     app:chipStrokeColor="@color/keep_card_border" />
@@ -125,7 +128,7 @@
         android:layout_gravity="center"
         android:text="@string/empty_notes"
         android:textColor="@color/keep_on_surface_variant"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:visibility="gone" />
 
     <!-- Extended FAB to create a new note -->
@@ -136,6 +139,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/create_note_fab"
+        android:textSize="16sp"
         android:textColor="@color/keep_on_surface"
         app:icon="@android:drawable/ic_input_add"
         app:iconTint="@color/keep_on_surface"

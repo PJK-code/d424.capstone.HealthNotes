@@ -1,12 +1,12 @@
 package com.example.d424capstone.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,7 +64,15 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new HealthNoteAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(HealthNote healthNote) {
-                Toast.makeText(MainActivity.this, "Clicked: " + healthNote.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NoteDetailsActivity.class);
+                intent.putExtra("noteId", healthNote.getNoteId());
+                intent.putExtra("title", healthNote.getTitle());
+                intent.putExtra("content", healthNote.getContent());
+                intent.putExtra("noteType", healthNote.getNoteType());
+                intent.putExtra("bodyLocation", healthNote.getBodyLocation());
+                intent.putExtra("date", healthNote.getDate());
+                intent.putExtra("severity", healthNote.getSeverity());
+                startActivity(intent);
             }
         });
 
@@ -72,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         fabCreateNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Create Note clicked (Stage 3)", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NoteDetailsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -103,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh notes list when returning from NoteDetailsActivity
+        loadNotes(editSearch.getText().toString());
     }
 
     // sample data

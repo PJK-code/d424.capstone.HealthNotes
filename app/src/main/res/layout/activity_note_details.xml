@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/keep_background"
+    android:fillViewport="true"
+    tools:context=".UI.NoteDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="24dp">
+
+        <!-- Top App Bar / Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="@color/keep_on_surface"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
+                android:contentDescription="Back"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/textHeaderTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Health Note"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/keep_on_surface" />
+        </LinearLayout>
+
+        <!-- Title Section Label & Input -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/keep_on_surface"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editNoteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title..."
+            android:textSize="18sp"
+            android:textColor="@color/keep_on_surface"
+            android:textColorHint="@color/keep_on_surface_variant"
+            android:background="@drawable/edit_text_underline"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="20dp"
+            android:inputType="textCapSentences"
+            android:autofillHints="name" />
+
+        <!-- Body Location Label & Input -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Body Location:"
+            android:textColor="@color/keep_on_surface_variant"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editBodyLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:autofillHints="postalAddress"
+            android:background="@drawable/edit_text_underline"
+            android:hint="e.g. Head &amp; Sinus, Lower Back"
+            android:inputType="textCapWords"
+            android:paddingBottom="12dp"
+            android:textColor="@color/keep_on_surface"
+            android:textColorHint="@color/keep_on_surface_variant"
+            android:textSize="18sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSelectBodyMap"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginBottom="20dp"
+            android:text="Select Body Location from Map"
+            android:textColor="@color/keep_on_surface"
+            android:textSize="16sp"
+            app:cornerRadius="27dp"
+            app:strokeColor="@color/keep_card_border" />
+
+        <!-- Notes / Symptoms / Details Input -->
+        <EditText
+            android:id="@+id/editNoteContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:gravity="top"
+            android:hint="Notes / Symptoms / Details..."
+            android:textSize="18sp"
+            android:textColor="@color/keep_on_surface"
+            android:textColorHint="@color/keep_on_surface_variant"
+            android:background="@drawable/edit_text_underline"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="24dp"
+            android:inputType="textMultiLine|textCapSentences"
+            android:autofillHints="note" />
+
+        <!-- Type Selection -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type:"
+            android:textSize="16sp"
+            android:textColor="@color/keep_on_surface_variant"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <RadioButton
+                android:id="@+id/radioIllness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Illness"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary"
+                android:checked="true"
+                android:layout_marginEnd="32dp" />
+
+            <RadioButton
+                android:id="@+id/radioInjury"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Injury"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary" />
+        </RadioGroup>
+
+        <!-- Date Selection -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date:"
+            android:textSize="16sp"
+            android:textColor="@color/keep_on_surface_variant"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Oct 21, 2026"
+            android:textSize="18sp"
+            android:textColor="@color/keep_on_surface"
+            android:textColorHint="@color/keep_on_surface_variant"
+            android:background="@drawable/edit_text_underline"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="24dp"
+            android:inputType="date"
+            android:autofillHints="date" />
+
+        <!-- Severity Selection (1-5) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Severity (1-5):"
+            android:textSize="16sp"
+            android:textColor="@color/keep_on_surface_variant"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupSeverity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <RadioButton
+                android:id="@+id/radioSeverity1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary" />
+
+            <RadioButton
+                android:id="@+id/radioSeverity2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioSeverity3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary" />
+
+            <RadioButton
+                android:id="@+id/radioSeverity4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary" />
+
+            <RadioButton
+                android:id="@+id/radioSeverity5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5"
+                android:textSize="16sp"
+                android:textColor="@color/keep_on_surface"
+                android:buttonTint="@color/keep_primary" />
+        </RadioGroup>
+
+        <!-- Save Note Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Save Note"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/keep_primary"
+            app:cornerRadius="28dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Delete Note Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Delete Note"
+            android:textSize="18sp"
+            android:textColor="#f28b82"
+            app:strokeColor="#f28b82"
+            app:cornerRadius="27dp"
+            android:visibility="gone"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+
+</ScrollView>
