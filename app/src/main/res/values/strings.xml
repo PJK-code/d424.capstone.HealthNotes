@@ -6,4 +6,6 @@
     <string name="filter_injury">Injuries</string>
     <string name="create_note_fab">Create a note</string>
     <string name="empty_notes">No health notes found</string>
+    <string name="edit_health_note">Edit Health Note</string>
+    <string name="add_health_note">Add Health Note</string>
 </resources>

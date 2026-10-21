@@ -14,8 +14,8 @@ import java.util.concurrent.Future;
 
 public class Repository {
 
-    private HealthNoteDAO healthNoteDAO;
-    private ExecutorService executorService;
+    private final HealthNoteDAO healthNoteDAO;
+    private final ExecutorService executorService;
 
     // initializes the DAO and background thread executor
     public Repository(Application application) {

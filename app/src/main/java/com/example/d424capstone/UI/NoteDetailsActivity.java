@@ -104,11 +104,11 @@ public class NoteDetailsActivity extends AppCompatActivity {
                 default: radioSeverity3.setChecked(true); break;
             }
 
-            textHeaderTitle.setText("Edit Health Note");
+            textHeaderTitle.setText(getString(R.string.edit_health_note));
             btnDelete.setVisibility(View.VISIBLE);
         } else {
             isEditing = false;
-            textHeaderTitle.setText("Add Health Note");
+            textHeaderTitle.setText(getString(R.string.add_health_note));
             // current date
             String currentDate = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault()).format(new Date());
             editDate.setText(currentDate);

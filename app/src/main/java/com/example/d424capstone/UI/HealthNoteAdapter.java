@@ -74,7 +74,7 @@ public class HealthNoteAdapter extends RecyclerView.Adapter<HealthNoteAdapter.He
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
+                    int position = getBindingAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(healthNotes.get(position));
                     }
