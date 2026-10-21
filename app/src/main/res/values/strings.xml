@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">d424.capstone</string>
+    <string name="app_name">Health Notes</string>
+    <string name="search_hint">Search health notes</string>
+    <string name="filter_all">All Notes</string>
+    <string name="filter_illness">Illnesses</string>
+    <string name="filter_injury">Injuries</string>
+    <string name="create_note_fab">Create a note</string>
+    <string name="empty_notes">No health notes found</string>
 </resources>

@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Google Keep Dark Theme Palette -->
+    <color name="keep_background">#202124</color>
+    <color name="keep_surface">#2d2e31</color>
+    <color name="keep_card_background">#202124</color>
+    <color name="keep_card_border">#5f6368</color>
+    <color name="keep_on_surface">#e8eaed</color>
+    <color name="keep_on_surface_variant">#9aa0a6</color>
+    <color name="keep_primary">#fbbc04</color>
+    <color name="keep_chip_bg">#3c4043</color>
+    <color name="keep_chip_selected">#5f6368</color>
 </resources>

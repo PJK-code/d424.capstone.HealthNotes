@@ -10,7 +10,7 @@ import com.example.d424capstone.dao.HealthNoteDAO;
 import com.example.d424capstone.entities.HealthNote;
 
 
-@Database(entities = {HealthNote.class}, version = 1, exportSchema = false)
+@Database(entities = {HealthNote.class}, version = 2, exportSchema = false)
 public abstract class HealthDatabaseBuilder extends RoomDatabase {
 
     // method that returns our DAO
