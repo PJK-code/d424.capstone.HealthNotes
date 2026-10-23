@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Refresh notes list when returning from NoteDetailsActivity
+        // refresh notes list when returning from NoteDetailsActivity
         loadNotes(editSearch.getText().toString());
     }
 

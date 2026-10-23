@@ -16,7 +16,6 @@
         android:orientation="vertical"
         android:padding="14dp">
 
-        <!-- Title of the health note -->
         <TextView
             android:id="@+id/textNoteTitle"
             android:layout_width="match_parent"
@@ -27,7 +26,6 @@
             android:maxLines="2"
             android:ellipsize="end" />
 
-        <!-- Content preview snippet -->
         <TextView
             android:id="@+id/textNoteContent"
             android:layout_width="match_parent"
@@ -45,7 +43,6 @@
             android:layout_marginTop="10dp"
             android:gravity="center_vertical">
 
-            <!-- Note Type Badge (Illness or Injury) -->
             <TextView
                 android:id="@+id/textNoteType"
                 android:layout_width="wrap_content"
@@ -62,7 +59,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <!-- Body location tag -->
             <TextView
                 android:id="@+id/textBodyLocation"
                 android:layout_width="wrap_content"
@@ -71,7 +67,6 @@
                 android:textColor="@color/keep_on_surface_variant" />
         </LinearLayout>
 
-        <!-- Date logged -->
         <TextView
             android:id="@+id/textNoteDate"
             android:layout_width="match_parent"

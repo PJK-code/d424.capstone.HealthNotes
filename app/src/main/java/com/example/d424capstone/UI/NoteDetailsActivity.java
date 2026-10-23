@@ -1,5 +1,6 @@
 package com.example.d424capstone.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
@@ -35,6 +37,10 @@ public class NoteDetailsActivity extends AppCompatActivity {
     private Repository repository;
     private int noteId = -1; // Default -1 for new note creation
     private boolean isEditing = false;
+
+    // request codes used when launching body map activities
+    private static final int REQUEST_CODE_FRONT_BODY = 101;
+    private static final int REQUEST_CODE_BACK_BODY = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +81,21 @@ public class NoteDetailsActivity extends AppCompatActivity {
         btnSelectBodyMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NoteDetailsActivity.this, "Body Map selection feature", Toast.LENGTH_SHORT).show();
+                CharSequence[] options = {"Front Body Map", "Back Body Map"};
+                new AlertDialog.Builder(NoteDetailsActivity.this)
+                        .setTitle("Select Body Map")
+                        .setItems(options, (dialog, which) -> {
+                            if (which == 0) {
+                                // Launch FrontBodyActivity and wait for selected zone result
+                                Intent intent = new Intent(NoteDetailsActivity.this, FrontBodyActivity.class);
+                                startActivityForResult(intent, REQUEST_CODE_FRONT_BODY);
+                            } else {
+                                // Launch BackBodyActivity and wait for selected zone result
+                                Intent intent = new Intent(NoteDetailsActivity.this, BackBodyActivity.class);
+                                startActivityForResult(intent, REQUEST_CODE_BACK_BODY);
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -133,7 +153,21 @@ public class NoteDetailsActivity extends AppCompatActivity {
         });
     }
 
-    // validates input and saves or updates the health note in the database.
+    // gets the selected body location result from FrontBodyActivity or BackBodyActivity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            if (requestCode == REQUEST_CODE_FRONT_BODY || requestCode == REQUEST_CODE_BACK_BODY) {
+                String location = data.getStringExtra("selectedBodyLocation");
+                if (location != null) {
+                    editBodyLocation.setText(location);
+                }
+            }
+        }
+    }
+
+    // validates input fields and inserts a new note or updates it
     private void saveNote() {
         String title = editTitle.getText() != null ? editTitle.getText().toString().trim() : "";
         String content = editContent.getText() != null ? editContent.getText().toString().trim() : "";

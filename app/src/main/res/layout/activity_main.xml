@@ -14,7 +14,6 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- Google Keep Style Search Bar Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="54dp"
@@ -58,7 +57,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Category Filter Chips -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,7 +107,6 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
-        <!-- Staggered RecyclerView for Health Note Cards -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewNotes"
             android:layout_width="match_parent"
@@ -120,7 +117,6 @@
 
     </LinearLayout>
 
-    <!-- Empty state message -->
     <TextView
         android:id="@+id/textEmptyState"
         android:layout_width="wrap_content"
@@ -131,7 +127,7 @@
         android:textSize="18sp"
         android:visibility="gone" />
 
-    <!-- Extended FAB to create a new note -->
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabCreateNote"
         android:layout_width="wrap_content"

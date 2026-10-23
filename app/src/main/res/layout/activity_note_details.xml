@@ -15,7 +15,6 @@
         android:padding="16dp"
         android:layout_marginTop="24dp">
 
-        <!-- Top App Bar / Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +43,6 @@
                 android:textColor="@color/keep_on_surface" />
         </LinearLayout>
 
-        <!-- Title Section Label & Input -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +66,6 @@
             android:inputType="textCapSentences"
             android:autofillHints="name" />
 
-        <!-- Body Location Label & Input -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,7 +100,6 @@
             app:cornerRadius="27dp"
             app:strokeColor="@color/keep_card_border" />
 
-        <!-- Notes / Symptoms / Details Input -->
         <EditText
             android:id="@+id/editNoteContent"
             android:layout_width="match_parent"
@@ -120,7 +116,6 @@
             android:inputType="textMultiLine|textCapSentences"
             android:autofillHints="note" />
 
-        <!-- Type Selection -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,7 +152,6 @@
                 android:buttonTint="@color/keep_primary" />
         </RadioGroup>
 
-        <!-- Date Selection -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,7 +174,6 @@
             android:inputType="date"
             android:autofillHints="date" />
 
-        <!-- Severity Selection (1-5) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -248,7 +241,6 @@
                 android:buttonTint="@color/keep_primary" />
         </RadioGroup>
 
-        <!-- Save Note Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
@@ -261,7 +253,6 @@
             app:cornerRadius="28dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Delete Note Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDelete"
             style="?attr/materialButtonOutlinedStyle"

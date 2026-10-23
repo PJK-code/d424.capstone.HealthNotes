@@ -21,7 +21,6 @@ public class Repository {
     public Repository(Application application) {
         HealthDatabaseBuilder db = HealthDatabaseBuilder.getDatabase(application);
         healthNoteDAO = db.healthNoteDAO();
-        // Executor with a single thread for queueing database operations safely
         executorService = Executors.newSingleThreadExecutor();
     }
 
@@ -34,7 +33,7 @@ public class Repository {
             }
         });
         try {
-            return future.get(); // Wait for background thread to finish and return results
+            return future.get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             return null;
