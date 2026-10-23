@@ -136,9 +136,10 @@
         <EditText
             android:id="@+id/editNoteContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="100dp"
+            android:layout_height="180dp"
             android:gravity="top"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
             android:hint="Notes / Symptoms / Details..."
             android:textSize="18sp"
             android:textColor="@color/keep_on_surface"

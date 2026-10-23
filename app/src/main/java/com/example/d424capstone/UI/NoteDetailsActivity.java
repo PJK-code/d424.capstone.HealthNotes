@@ -54,6 +54,18 @@ public class NoteDetailsActivity extends AppCompatActivity {
         editContent = findViewById(R.id.editNoteContent);
         editBodyLocation = findViewById(R.id.editBodyLocation);
         editDate = findViewById(R.id.editDate);
+
+        // allow internal scrolling inside editContent when inside ScrollView
+        editContent.setOnTouchListener((v, event) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            if ((event.getAction() & android.view.MotionEvent.ACTION_MASK) == android.view.MotionEvent.ACTION_UP) {
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+            }
+            if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+                v.performClick();
+            }
+            return false;
+        });
         radioGroupType = findViewById(R.id.radioGroupType);
         radioGroupSeverity = findViewById(R.id.radioGroupSeverity);
         radioIllness = findViewById(R.id.radioIllness);
