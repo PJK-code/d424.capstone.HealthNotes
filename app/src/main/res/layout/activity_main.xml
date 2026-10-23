@@ -89,9 +89,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/filter_illness"
                     android:textSize="14sp"
-                    android:textColor="@color/keep_on_surface"
+                    android:textColor="@color/tag_illness_stroke"
                     app:chipBackgroundColor="@color/keep_surface"
-                    app:chipStrokeColor="@color/keep_card_border" />
+                    app:chipStrokeColor="@color/tag_illness_stroke" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipInjury"
@@ -100,9 +100,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/filter_injury"
                     android:textSize="14sp"
-                    android:textColor="@color/keep_on_surface"
+                    android:textColor="@color/tag_injury_stroke"
                     app:chipBackgroundColor="@color/keep_surface"
-                    app:chipStrokeColor="@color/keep_card_border" />
+                    app:chipStrokeColor="@color/tag_injury_stroke" />
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>

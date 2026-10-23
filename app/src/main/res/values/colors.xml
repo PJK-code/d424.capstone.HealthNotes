@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Google Keep Dark Theme Palette -->
+    <!-- Dark Theme Palette -->
     <color name="keep_background">#202124</color>
     <color name="keep_surface">#2d2e31</color>
     <color name="keep_card_background">#202124</color>
@@ -13,4 +13,12 @@
     <color name="keep_primary">#fbbc04</color>
     <color name="keep_chip_bg">#3c4043</color>
     <color name="keep_chip_selected">#5f6368</color>
+
+    <!-- Illness Tag (Blue) -->
+    <color name="tag_illness_stroke">#8ab4f8</color>
+    <color name="tag_illness_bg">#1a2638</color>
+
+    <!-- Injury Tag (Red) -->
+    <color name="tag_injury_stroke">#f28b82</color>
+    <color name="tag_injury_bg">#381e1e</color>
 </resources>

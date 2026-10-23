@@ -30,9 +30,9 @@ public class NoteDetailsActivity extends AppCompatActivity {
     private RadioGroup radioGroupType, radioGroupSeverity;
     private RadioButton radioIllness, radioInjury;
     private RadioButton radioSeverity1, radioSeverity2, radioSeverity3, radioSeverity4, radioSeverity5;
-    private MaterialButton btnSave, btnDelete, btnSelectBodyMap;
+    private MaterialButton btnSave, btnDelete, btnFrontBodyMap, btnRearBodyMap;
     private TextView textHeaderTitle;
-    private View btnBack;
+    private View btnBack, btnShare;
 
     private Repository repository;
     private int noteId = -1; // Default -1 for new note creation
@@ -65,9 +65,11 @@ public class NoteDetailsActivity extends AppCompatActivity {
         radioSeverity5 = findViewById(R.id.radioSeverity5);
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
-        btnSelectBodyMap = findViewById(R.id.btnSelectBodyMap);
+        btnFrontBodyMap = findViewById(R.id.btnFrontBodyMap);
+        btnRearBodyMap = findViewById(R.id.btnRearBodyMap);
         textHeaderTitle = findViewById(R.id.textHeaderTitle);
         btnBack = findViewById(R.id.btnBack);
+        btnShare = findViewById(R.id.btnShare);
 
         // back button click listener
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -77,25 +79,29 @@ public class NoteDetailsActivity extends AppCompatActivity {
             }
         });
 
-        // body map button click listener
-        btnSelectBodyMap.setOnClickListener(new View.OnClickListener() {
+        // share button click listener
+        btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CharSequence[] options = {"Front Body Map", "Back Body Map"};
-                new AlertDialog.Builder(NoteDetailsActivity.this)
-                        .setTitle("Select Body Map")
-                        .setItems(options, (dialog, which) -> {
-                            if (which == 0) {
-                                // Launch FrontBodyActivity and wait for selected zone result
-                                Intent intent = new Intent(NoteDetailsActivity.this, FrontBodyActivity.class);
-                                startActivityForResult(intent, REQUEST_CODE_FRONT_BODY);
-                            } else {
-                                // Launch BackBodyActivity and wait for selected zone result
-                                Intent intent = new Intent(NoteDetailsActivity.this, BackBodyActivity.class);
-                                startActivityForResult(intent, REQUEST_CODE_BACK_BODY);
-                            }
-                        })
-                        .show();
+                showShareOptions();
+            }
+        });
+
+        // front body map button click listener
+        btnFrontBodyMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NoteDetailsActivity.this, FrontBodyActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FRONT_BODY);
+            }
+        });
+
+        // rear body map button click listener
+        btnRearBodyMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NoteDetailsActivity.this, BackBodyActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_BACK_BODY);
             }
         });
 
@@ -237,5 +243,85 @@ public class NoteDetailsActivity extends AppCompatActivity {
             Toast.makeText(this, "Note deleted", Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
+
+    // shows a dialog with sharing options (Email, Clipboard, Print, Other Apps) populated with note details
+    private void showShareOptions() {
+        String title = editTitle.getText() != null ? editTitle.getText().toString().trim() : "";
+        String content = editContent.getText() != null ? editContent.getText().toString().trim() : "";
+        String bodyLocation = editBodyLocation.getText() != null ? editBodyLocation.getText().toString().trim() : "";
+        String date = editDate.getText() != null ? editDate.getText().toString().trim() : "";
+        String noteType = radioInjury.isChecked() ? "Injury" : "Illness";
+
+        int severity = 3;
+        int checkedSeverityId = radioGroupSeverity.getCheckedRadioButtonId();
+        if (checkedSeverityId == R.id.radioSeverity1) severity = 1;
+        else if (checkedSeverityId == R.id.radioSeverity2) severity = 2;
+        else if (checkedSeverityId == R.id.radioSeverity3) severity = 3;
+        else if (checkedSeverityId == R.id.radioSeverity4) severity = 4;
+        else if (checkedSeverityId == R.id.radioSeverity5) severity = 5;
+
+        final int finalSeverity = severity;
+
+        String shareText = "Health Note: " + (title.isEmpty() ? "Untitled" : title) + "\n" +
+                "Type: " + noteType + "\n" +
+                "Body Location: " + (bodyLocation.isEmpty() ? "N/A" : bodyLocation) + "\n" +
+                "Date: " + date + "\n" +
+                "Severity: " + finalSeverity + "/5\n\n" +
+                "Details:\n" + (content.isEmpty() ? "N/A" : content);
+
+        CharSequence[] options = {"Share via E-mail", "Copy to Clipboard", "Print Note", "Other Share Apps"};
+        new AlertDialog.Builder(NoteDetailsActivity.this)
+                .setTitle("Share Note Details")
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        // Email
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(android.net.Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Health Note: " + (title.isEmpty() ? "Note" : title));
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                        try {
+                            startActivity(emailIntent);
+                        } catch (android.content.ActivityNotFoundException e) {
+                            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                            sendIntent.setType("text/plain");
+                            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Health Note: " + (title.isEmpty() ? "Note" : title));
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                            startActivity(Intent.createChooser(sendIntent, "Share via E-mail"));
+                        }
+                    } else if (which == 1) {
+                        // Clipboard
+                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        android.content.ClipData clip = android.content.ClipData.newPlainText("Health Note", shareText);
+                        clipboard.setPrimaryClip(clip);
+                        Toast.makeText(NoteDetailsActivity.this, "Note copied to clipboard", Toast.LENGTH_SHORT).show();
+                    } else if (which == 2) {
+                        // Print
+                        android.print.PrintManager printManager = (android.print.PrintManager) getSystemService(PRINT_SERVICE);
+                        String printJobName = getString(R.string.app_name) + " - " + (title.isEmpty() ? "Health Note" : title);
+                        android.webkit.WebView webView = new android.webkit.WebView(NoteDetailsActivity.this);
+                        String htmlDocument = "<html><body>" +
+                                "<h2>" + android.text.TextUtils.htmlEncode(title.isEmpty() ? "Health Note" : title) + "</h2>" +
+                                "<p><b>Type:</b> " + android.text.TextUtils.htmlEncode(noteType) + "</p>" +
+                                "<p><b>Body Location:</b> " + android.text.TextUtils.htmlEncode(bodyLocation) + "</p>" +
+                                "<p><b>Date:</b> " + android.text.TextUtils.htmlEncode(date) + "</p>" +
+                                "<p><b>Severity:</b> " + finalSeverity + "/5</p>" +
+                                "<p><b>Details:</b><br/>" + android.text.TextUtils.htmlEncode(content).replace("\n", "<br/>") + "</p>" +
+                                "</body></html>";
+                        webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
+                        android.print.PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter(printJobName);
+                        if (printManager != null) {
+                            printManager.print(printJobName, printAdapter, new android.print.PrintAttributes.Builder().build());
+                        }
+                    } else if (which == 3) {
+                        // Other Apps
+                        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.setType("text/plain");
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Health Note: " + (title.isEmpty() ? "Note" : title));
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                        startActivity(Intent.createChooser(sendIntent, "Share Note"));
+                    }
+                })
+                .show();
     }
 }

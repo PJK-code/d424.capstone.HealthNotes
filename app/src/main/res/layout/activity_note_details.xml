@@ -35,12 +35,24 @@
 
             <TextView
                 android:id="@+id/textHeaderTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Add Health Note"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/keep_on_surface" />
+
+            <ImageView
+                android:id="@+id/btnShare"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@android:drawable/ic_menu_share"
+                app:tint="@color/keep_on_surface"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
+                android:contentDescription="@string/share"
+                android:layout_marginStart="12dp" />
         </LinearLayout>
 
         <TextView
@@ -88,17 +100,38 @@
             android:textColorHint="@color/keep_on_surface_variant"
             android:textSize="18sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSelectBodyMap"
-            style="?attr/materialButtonOutlinedStyle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginBottom="20dp"
-            android:text="Select Body Location from Map"
-            android:textColor="@color/keep_on_surface"
-            android:textSize="16sp"
-            app:cornerRadius="27dp"
-            app:strokeColor="@color/keep_card_border" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFrontBodyMap"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Front Body Map"
+                android:textColor="@color/keep_on_surface"
+                android:textSize="15sp"
+                app:cornerRadius="27dp"
+                app:strokeColor="@color/keep_card_border" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRearBodyMap"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Rear Body Map"
+                android:textColor="@color/keep_on_surface"
+                android:textSize="15sp"
+                app:cornerRadius="27dp"
+                app:strokeColor="@color/keep_card_border" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/editNoteContent"
@@ -138,7 +171,7 @@
                 android:text="Illness"
                 android:textSize="16sp"
                 android:textColor="@color/keep_on_surface"
-                android:buttonTint="@color/keep_primary"
+                android:buttonTint="@color/tag_illness_stroke"
                 android:checked="true"
                 android:layout_marginEnd="32dp" />
 
@@ -149,7 +182,7 @@
                 android:text="Injury"
                 android:textSize="16sp"
                 android:textColor="@color/keep_on_surface"
-                android:buttonTint="@color/keep_primary" />
+                android:buttonTint="@color/tag_injury_stroke" />
         </RadioGroup>
 
         <TextView

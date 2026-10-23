@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.d424capstone.R;
@@ -42,7 +43,20 @@ public class HealthNoteAdapter extends RecyclerView.Adapter<HealthNoteAdapter.He
         HealthNote currentNote = healthNotes.get(position);
         holder.textTitle.setText(currentNote.getTitle());
         holder.textContent.setText(currentNote.getContent());
-        holder.textType.setText(currentNote.getNoteType());
+        
+        String noteType = currentNote.getNoteType();
+        holder.textType.setText(noteType);
+        if ("Injury".equalsIgnoreCase(noteType)) {
+            holder.textType.setBackgroundResource(R.drawable.badge_background_injury);
+            holder.textType.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.tag_injury_stroke));
+        } else if ("Illness".equalsIgnoreCase(noteType)) {
+            holder.textType.setBackgroundResource(R.drawable.badge_background_illness);
+            holder.textType.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.tag_illness_stroke));
+        } else {
+            holder.textType.setBackgroundResource(R.drawable.badge_background);
+            holder.textType.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.keep_primary));
+        }
+
         holder.textLocation.setText(currentNote.getBodyLocation());
         holder.textDate.setText(currentNote.getDate());
     }
