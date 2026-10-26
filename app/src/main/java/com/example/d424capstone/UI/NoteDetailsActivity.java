@@ -17,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 import com.example.d424capstone.R;
 import com.example.d424capstone.database.Repository;
 import com.example.d424capstone.entities.HealthNote;
+import com.example.d424capstone.utils.SecurityUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -187,15 +188,38 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
     // validates input fields and inserts a new note or updates it
     private void saveNote() {
-        String title = editTitle.getText() != null ? editTitle.getText().toString().trim() : "";
-        String content = editContent.getText() != null ? editContent.getText().toString().trim() : "";
-        String bodyLocation = editBodyLocation.getText() != null ? editBodyLocation.getText().toString().trim() : "";
-        String date = editDate.getText() != null ? editDate.getText().toString().trim() : "";
+        String rawTitle = editTitle.getText() != null ? editTitle.getText().toString() : "";
+        String rawContent = editContent.getText() != null ? editContent.getText().toString() : "";
+        String rawBodyLocation = editBodyLocation.getText() != null ? editBodyLocation.getText().toString() : "";
+        String rawDate = editDate.getText() != null ? editDate.getText().toString() : "";
+
+        // sanitize inputs
+        String title = SecurityUtils.sanitizeInput(rawTitle);
+        String content = SecurityUtils.sanitizeInput(rawContent);
+        String bodyLocation = SecurityUtils.sanitizeInput(rawBodyLocation);
+        String date = SecurityUtils.sanitizeInput(rawDate);
 
         // make sure title valid
         if (title.isEmpty()) {
             editTitle.setError("Title is required");
             editTitle.requestFocus();
+            return;
+        }
+
+        if (title.length() > 100) {
+            editTitle.setError("Title cannot exceed 100 characters");
+            editTitle.requestFocus();
+            return;
+        }
+
+        if (content.length() > 5000) {
+            editContent.setError("Note content cannot exceed 5000 characters");
+            editContent.requestFocus();
+            return;
+        }
+
+        if (!SecurityUtils.isValidText(title, 100) || !SecurityUtils.isValidText(content, 5000)) {
+            Toast.makeText(this, "Input contains invalid characters", Toast.LENGTH_SHORT).show();
             return;
         }
 
