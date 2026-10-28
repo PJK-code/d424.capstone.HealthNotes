@@ -6,7 +6,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.example.d424capstone.R;
 import com.example.d424capstone.database.Repository;
 import com.example.d424capstone.entities.HealthNote;
+import com.example.d424capstone.utils.HealthReportGenerator;
 
 import java.util.List;
 
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ChipGroup chipGroupFilters;
     private TextView textEmptyState;
     private ExtendedFloatingActionButton fabCreateNote;
+    private ImageView btnShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
         chipGroupFilters = findViewById(R.id.chipGroupFilters);
         textEmptyState = findViewById(R.id.textEmptyState);
         fabCreateNote = findViewById(R.id.fabCreateNote);
+        btnShare = findViewById(R.id.btnShare);
+
+        // share button click listener
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generateAndShareReport();
+            }
+        });
 
         // setup RecyclerView
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -165,5 +178,22 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.GONE);
             textEmptyState.setVisibility(View.VISIBLE);
         }
+    }
+
+    // import text report for health notes organized by year
+    private void generateAndShareReport() {
+        List<HealthNote> allNotes = repository.getAllNotes();
+        String reportText = HealthReportGenerator.generateReportText(allNotes);
+        if (reportText == null) {
+            Toast.makeText(this, "No health notes available to generate report.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // share report
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Health Notes Report (Organized by Year)");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, reportText);
+        startActivity(Intent.createChooser(sendIntent, "Share Health Notes Report"));
     }
 }
